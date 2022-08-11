@@ -15,7 +15,7 @@
 
 Automatically generating question from context is a trival task till today. This approach uses transformers and other algorithms to generate both question and answers from given context. We can divide the problem (Automatic question & answer generation) into many subproblems.
 
-> This is applicable only to MCQ question generation.
+> NOTE: This is applicable only to MCQ question generation.
 
 Workflow is,
 
