@@ -58,7 +58,7 @@ $ docker run --name mcq-gen -d -p 8080:8080 quizzzy/latest
 
 Body of POST req should be,
 
-```sh
+```
 {
     context: <context needed to generate questions and answers>
     uid: <firebase user unique id >
