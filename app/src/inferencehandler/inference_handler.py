@@ -8,6 +8,7 @@ def get_all_summary(model, context):
     """Generate summary of input corpus.
 
     Args:
+        model (OnnxT5): T5 transformer for summarization.
         context (str): Bunch of unprocessed text.
 
     Returns:
@@ -27,6 +28,7 @@ def get_all_questions(model, context, answer):
     """Return list of generated questions.
 
     Args:
+        model (OnnxT5): T5 transformer for question generation.
         context (list(str)): list of context for generating questions.
         answer (list(str)): list of answers for question which will be generated.
 
