@@ -6,9 +6,9 @@
   <a href="https://codecov.io/gh/Karthick47v2/quizzzy-backend" > 
     <img src="https://codecov.io/gh/Karthick47v2/quizzzy-backend/branch/main/graph/badge.svg?token=YfdXXboTdc"/> 
  </a>
- <a href="#" target="_blank" > 
-    <img alt="Vulnerability scan" src="https://snyk.io/test/github/karthick47v2/quizzzy-backend/badge.svg" />
-  </a>
+ <a href="https://snyk.io/test/github/Karthick47v2/quizzzy-backend">
+ <img src="https://snyk.io/test/github/Karthick47v2/quizzzy-backend/badge.svg"/> 
+ </a>
 </p>
 
 > This is backend for [Quizzzy](https://github.com/Karthick47v2/quizzzy/), Python application which automatically generate **_MCQ (specially factoid)_** questions and answers from given context, uses FastAPI to build APIs.
