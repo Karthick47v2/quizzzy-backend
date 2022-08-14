@@ -64,7 +64,7 @@ Body of POST req should be,
     uid: <firebase user unique id >
     name: <title for questionnaire>
 }
-# flask app designed in a way to automatically send generated ans and question to requested flutter app user's auth id
+# app designed in a way to automatically send generated ans and question to requested flutter app user's auth id
 ```
 
 ## Run tests
