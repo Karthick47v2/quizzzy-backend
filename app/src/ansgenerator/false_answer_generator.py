@@ -7,6 +7,7 @@ import os
 import random
 import urllib.request
 import tarfile
+import tempfile
 
 import numpy as np
 
@@ -41,28 +42,28 @@ class FalseAnswerGenerator:
         if not os.path.isdir(os.getcwd() + '/s2v_old'):
             s2v_url = "https://github.com/explosion/sense2vec/releases/download/"
             s2v_ver_url = s2v_url + "v1.0.0/s2v_reddit_2015_md.tar.gz"
+
             with urllib.request.urlopen(s2v_ver_url) as req:
-                with tarfile.open(fileobj=req, mode='r|gz') as file:
-                    def is_within_directory(directory, target):
-                        
-                        abs_directory = os.path.abspath(directory)
-                        abs_target = os.path.abspath(target)
-                    
-                        prefix = os.path.commonprefix([abs_directory, abs_target])
-                        
-                        return prefix == abs_directory
-                    
-                    def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
-                    
-                        for member in tar.getmembers():
-                            member_path = os.path.join(path, member.name)
-                            if not is_within_directory(path, member_path):
-                                raise Exception("Attempted Path Traversal in Tar File")
-                    
-                        tar.extractall(path, members, numeric_owner=numeric_owner) 
-                        
-                    
-                    safe_extract(file)
+                # save downloaded to a temp file first
+                with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                    temp_file.write(req.read())
+                    temp_file_path = temp_file.name
+
+            with tarfile.open(temp_file_path, mode='r:gz') as file:
+                def is_within_directory(directory, target):
+                    abs_directory = os.path.abspath(directory)
+                    abs_target = os.path.abspath(target)
+                    prefix = os.path.commonprefix([abs_directory, abs_target])
+                    return prefix == abs_directory
+
+                def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                    for member in tar.getmembers():
+                        member_path = os.path.join(path, member.name)
+                        if not is_within_directory(path, member_path):
+                            raise Exception("Attempted Path Traversal in Tar File")
+                    tar.extractall(path, members, numeric_owner=numeric_owner)
+
+                safe_extract(file)
 
         self._s2v = Sense2Vec().from_disk("s2v_old")
 
